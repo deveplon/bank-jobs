@@ -19,7 +19,7 @@ services:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
     networks:
-      - app-network
+      - bank-job-network
     command: ./wait-for.sh db:27017 -- npm run dev
 
   db:
@@ -32,7 +32,7 @@ services:
     volumes:
       - dbdata:/data/db
     networks:
-      - app-network
+      - bank-job-network
 
 networks:
   bank-job-network:
