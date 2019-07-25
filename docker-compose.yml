@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+  nuxt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: bank-jobs
+    restart: always
+    env_file: .env
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - NUXT_HOST=${NUXT_HOST}
+      - NUXT_PORT=${NUXT_PORT}
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    networks:
+      - app-network
+    command: ./wait-for.sh db:27017 -- npm run dev
+
+  db:
+    image: mongo:4.1.8-xenial
+    container_name: db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_PATH=./db.config.js
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - app-network
+
+networks:
+  bank-job-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+  node_modules:
+
