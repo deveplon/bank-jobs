@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        BankJob
+        BankJob Change
       </h1>
       <h2 class="subtitle">
         The Bank Jobs Project

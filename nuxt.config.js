@@ -49,5 +49,14 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  /*
+   ** Watch changes
+   ** Nuxt documentation https://nuxtjs.org/api/configuration-watchers
+  */
+  watchers: {
+    webpack: {
+      poll: true
+    }
   }
 }
