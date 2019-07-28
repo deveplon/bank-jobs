@@ -15,6 +15,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@nuxtjs/axios": "^5.3.6",
     "bcryptjs": "^2.4.3",
     "bootstrap-vue": "^2.0.0-rc.27",
@@ -24,7 +26,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.0-beta2",
     "npm": "^6.10.2",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "nuxt-fontawesome": "^0.4.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

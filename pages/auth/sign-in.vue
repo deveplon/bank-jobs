@@ -76,6 +76,7 @@ import { isValidEmail, isValidPass } from '~/utils/form-validator.js'
 import { onSubmit } from '~/utils/auth.js'
 
 export default {
+  layout: 'auth',
   middleware: 'auth/authenticated',
   components: {
     Toast

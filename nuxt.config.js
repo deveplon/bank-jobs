@@ -48,7 +48,8 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/eslint-module',
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    'nuxt-fontawesome'
   ],
   /*
    ** Axios module configuration
@@ -59,6 +60,18 @@ module.exports = {
       process.env.NODE_ENV === 'production'
         ? `http://${NUXT_HOST}/api`
         : `http://${NUXT_HOST}:${NUXT_PORT}/api`
+  },
+  /*
+   ** Fontawesome imports
+   ** See https://www.npmjs.com/package/nuxt-fontawesome
+   */
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      }
+    ]
   },
   /*
    ** Build configuration

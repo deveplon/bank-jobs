@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    Hello Index
-  </div>
+  <b-card>
+    Welcome
+  </b-card>
 </template>
 
 <script>
