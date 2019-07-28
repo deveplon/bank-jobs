@@ -17,6 +17,7 @@ services:
       - MONGO_PORT=${MONGO_PORT}
       - MONGO_DB=${MONGO_DB}
       - MONGO_RETRIES=${MONGO_RETRIES}
+      - SECRET=${SECRET}
     depends_on:
       - bank-job-db
     ports:

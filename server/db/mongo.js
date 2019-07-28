@@ -11,7 +11,7 @@ const {
   MONGO_RECONNECT_INTERVAL
 } = process.env
 
-const url = `mongodb://${MONGO_HOST}:12321`
+const url = `mongodb://${MONGO_HOST}:${MONGO_PORT}`
 const options = {
   reconnectTries: 60 * 60 * 24,
   reconnectInterval: 1000,

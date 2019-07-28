@@ -1,10 +1,10 @@
 <template>
-  <div class="sign-in">
+  <div class="sign-up">
     <toast />
-    <div class="login-form">
+    <div class="sign-up-form">
       <b-form @submit="onSubmit">
         <h2 class="text-center mb-4">
-          Sing In
+          Sing Up
         </h2>
         <b-form-group id="email-group" label="Email address:" label-for="email">
           <b-form-input
@@ -13,13 +13,31 @@
             type="email"
             required
             :state="validEmail"
-            placeholder="Enter your email here"
+            placeholder="Enter email"
             @blur="validEmail = isValidEmail(form.email)"
           />
           <b-form-invalid-feedback :state="validEmail">
             Invalid email please use something like test@test.com
           </b-form-invalid-feedback>
           <b-form-valid-feedback :state="validEmail">
+            Looks Good.
+          </b-form-valid-feedback>
+        </b-form-group>
+
+        <b-form-group id="name-group" label="Your Name:" label-for="name">
+          <b-form-input
+            id="name"
+            v-model="form.name"
+            required
+            :state="validName"
+            placeholder="Enter your name here"
+            @blur="validName = isValidText(form.name)"
+          />
+
+          <b-form-invalid-feedback :state="validName">
+            Invalid name, only accept letters
+          </b-form-invalid-feedback>
+          <b-form-valid-feedback :state="validName">
             Looks Good.
           </b-form-valid-feedback>
         </b-form-group>
@@ -47,6 +65,29 @@
           </b-form-valid-feedback>
         </b-form-group>
 
+        <b-form-group
+          id="confirm-group"
+          label="Your Password Confirmation:"
+          label-for="pass"
+        >
+          <b-form-input
+            id="pass"
+            v-model="form.confirm"
+            type="password"
+            required
+            :state="validConfirm"
+            placeholder="Enter your password again here"
+            @blur="validConfirm = match(form.password, form.confirm)"
+          />
+
+          <b-form-invalid-feedback :state="validConfirm">
+            The password and password confirmation does not match
+          </b-form-invalid-feedback>
+          <b-form-valid-feedback :state="validConfirm">
+            Looks Good.
+          </b-form-valid-feedback>
+        </b-form-group>
+
         <b-button class="mt-4" type="submit" block variant="outline-primary">
           <b-spinner
             v-if="loading"
@@ -58,12 +99,6 @@
             Submit
           </span>
         </b-button>
-
-        <div class="mt-4 d-flex justify-content-center">
-          <NLink to="/remember-pass">
-            forgot your password?
-          </NLink>
-        </div>
       </b-form>
     </div>
   </div>
@@ -72,7 +107,13 @@
 <script>
 import Toast from '~/components/global/Toast.vue'
 
-import { isValidEmail, isValidPass } from '~/utils/form-validator.js'
+import {
+  isValidText,
+  isValidEmail,
+  isValidPass,
+  match
+} from '~/utils/form-validator.js'
+
 import { onSubmit } from '~/utils/auth.js'
 
 export default {
@@ -84,10 +125,14 @@ export default {
     return {
       form: {
         email: '',
-        password: ''
+        name: '',
+        password: '',
+        confirm: ''
       },
       validEmail: null,
       validPass: null,
+      validName: null,
+      validConfirm: null,
       loading: false
     }
   },
@@ -95,23 +140,25 @@ export default {
     async onSubmit(e) {
       e.preventDefault()
       const submit = onSubmit.bind(this)
-      await submit('auth/login', this.form)
+      await submit('auth/register', this.form)
     },
+    isValidText,
     isValidEmail,
-    isValidPass
+    isValidPass,
+    match
   }
 }
 </script>
 
 <style scoped>
-.sign-in {
+.sign-up {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100vh;
 }
-.login-form {
+.sign-up-form {
   flex-basis: 30%;
   padding: 20px 25px 30px 25px;
   border: 1px solid var(--border-and-shadow);

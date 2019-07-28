@@ -7,10 +7,10 @@ import { secret } from '~/app.config.js'
  * @param {Mixed} data
  * @param {Function} cb
  */
-export const encode = (data, cb) => {
-  jwt.sign({ data }, secret, { algorithm: 'RS256' }, cb)
+export const encode = data => {
+  return jwt.sign({ data }, secret)
 }
 
-export const decode = (token, cb) => {
-  jwt.verify(token, secret, cb)
+export const decode = token => {
+  return jwt.verify(token, secret)
 }

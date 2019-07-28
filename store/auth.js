@@ -1,3 +1,6 @@
+import { encode } from '../utils/token'
+import { setCookie } from '../utils/cookies'
+
 export const state = () => ({
   user: null
 })
@@ -19,7 +22,13 @@ export const mutations = {
 
 export const actions = {
   async login({ commit }, data) {
-    const { user } = await this.$axios.$post('/auth/login', data)
-    commit('setUser', user)
+    const { id } = await this.$axios.$post('/auth/login', data)
+    const token = await encode({ id })
+    setCookie('auth', token)
+    commit('setUser', id)
+  },
+  async register({ commit }, data) {
+    await this.$axios.$post('/auth/register', data)
+    return true
   }
 }
