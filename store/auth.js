@@ -16,3 +16,10 @@ export const mutations = {
     state.user = user || null
   }
 }
+
+export const actions = {
+  async login({ commit }, data) {
+    const { user } = await this.$axios.$post('/auth/login', data)
+    commit('setUser', user)
+  }
+}

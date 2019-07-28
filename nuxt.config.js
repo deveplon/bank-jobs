@@ -1,5 +1,7 @@
 const path = require('path')
 
+const { NUXT_HOST, NUXT_PORT } = process.env
+
 module.exports = {
   /*
    ** Nuxt application mode
@@ -38,7 +40,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/axios'],
   /*
    ** Nuxt.js modules
    */
@@ -52,7 +54,12 @@ module.exports = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL:
+      process.env.NODE_ENV === 'production'
+        ? `http://${NUXT_HOST}/api`
+        : `http://${NUXT_HOST}:${NUXT_PORT}/api`
+  },
   /*
    ** Build configuration
    */

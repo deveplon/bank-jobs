@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  nuxt:
+  bank-job:
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,6 +13,12 @@ services:
       - NODE_ENV=${NODE_ENV}
       - NUXT_HOST=${NUXT_HOST}
       - NUXT_PORT=${NUXT_PORT}
+      - MONGO_HOST=${MONGO_HOST}
+      - MONGO_PORT=${MONGO_PORT}
+      - MONGO_DB=${MONGO_DB}
+      - MONGO_RETRIES=${MONGO_RETRIES}
+    depends_on:
+      - bank-job-db
     ports:
       - "3000:3000"
     volumes:
@@ -26,11 +32,8 @@ services:
     image: mongo:4.1.8-xenial
     container_name: db
     restart: unless-stopped
-    env_file: .env
-    environment:
-      - MONGO_PATH=./db.config.js
-    depends_on:
-      - nuxt
+    ports:
+      - "27017:27017"
     volumes:
       - dbdata:/data/db
     networks:

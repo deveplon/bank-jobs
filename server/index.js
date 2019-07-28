@@ -3,8 +3,11 @@ const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
 
-// Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
+const routes = require('./routes')
+const { mongoConnect } = require('./db/mongo')
+
+// Import and Set Nuxt.js options
 config.dev = !(process.env.NODE_ENV === 'production')
 
 module.exports = async function start() {
@@ -21,8 +24,30 @@ module.exports = async function start() {
     await nuxt.ready()
   }
 
+  let mongo
+  try {
+    mongo = await mongoConnect()
+  } catch (err) {
+    consola.warn(err.message)
+  }
+
+  app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*'])
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    res.append('Access-Control-Allow-Headers', 'Content-Type')
+    req.mongo = mongo
+    next()
+  })
+
+  app.use('/api', routes)
+
   // Give nuxt middleware to express
-  app.use(nuxt.render)
+  app.use((req, res, next) => {
+    if (/^\/api.*$/.test(req.originalUrl)) {
+      return res.status(404).json({ error: 'Cannot find the api you call' })
+    }
+    return nuxt.render(req, res, next)
+  })
 
   // Listen the server
   app.listen(port)

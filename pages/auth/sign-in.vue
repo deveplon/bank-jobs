@@ -83,9 +83,14 @@ export default {
     }
   },
   methods: {
-    onSubmit(e) {
+    async onSubmit(e) {
       e.preventDefault()
-      alert(JSON.stringify(this.form))
+      try {
+        await this.$store.dispatch('auth/login', this.form)
+        this.$router.push('/')
+      } catch (error) {
+        alert(error.code + ' ' + error.message)
+      }
     },
     onReset(e) {
       e.preventDefault()
