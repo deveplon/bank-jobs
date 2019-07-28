@@ -5,6 +5,11 @@
 </template>
 
 <style>
+:root {
+  --border-and-shadow: #d3d3d3;
+  --bg-light: #fafafa;
+}
+
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -15,6 +20,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-light);
 }
 
 *,

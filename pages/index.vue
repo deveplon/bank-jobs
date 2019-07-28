@@ -3,10 +3,12 @@
     <div>
       <logo />
       <h1 class="title">
-        BankJob Change
+        <NLink to="/auth/sign-in">
+          Auth
+        </NLink>
       </h1>
       <h2 class="subtitle">
-        The Bank Jobs Project
+        BankJobs APP Welcome
       </h2>
       <div class="links">
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">

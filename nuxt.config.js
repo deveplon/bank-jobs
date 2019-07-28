@@ -1,4 +1,9 @@
+const path = require('path')
+
 module.exports = {
+  /*
+   ** Nuxt application mode
+   */
   mode: 'universal',
   /*
    ** Headers of the page
@@ -15,6 +20,12 @@ module.exports = {
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+  },
+  /*
+   ** Router config
+   */
+  router: {
+    middleware: ['auth/check-auth', 'auth/unauthenticated']
   },
   /*
    ** Customize the progress-bar color
@@ -34,7 +45,8 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    'bootstrap-vue/nuxt'
   ],
   /*
    ** Axios module configuration
@@ -48,12 +60,15 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      config.resolve.alias['~/'] = path.resolve(__dirname)
+      config.resolve.alias['@/'] = path.resolve(__dirname)
+    }
   },
   /*
    ** Watch changes
    ** Nuxt documentation https://nuxtjs.org/api/configuration-watchers
-  */
+   */
   watchers: {
     webpack: {
       poll: true
