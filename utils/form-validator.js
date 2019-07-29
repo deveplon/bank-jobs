@@ -5,6 +5,8 @@
  * @returns
  */
 export const isValidText = text => {
+  if (text.trim().length === 0) return false
+
   return /^[a-zA-Z0-9 ]*$/gm.test(text)
 }
 
@@ -15,6 +17,8 @@ export const isValidText = text => {
  * @returns
  */
 export const isValidEmail = email => {
+  if (email.trim().length === 0) return false
+
   return /\S+@\S+\.\S+/.test(email)
 }
 
@@ -25,6 +29,8 @@ export const isValidEmail = email => {
  * @returns
  */
 export const isValidPass = pass => {
+  if (pass.trim().length === 0) return false
+
   return /^[a-zA-Z0-9_\-#$^+=!*()@%&]*$/gm.test(pass)
 }
 
@@ -36,5 +42,7 @@ export const isValidPass = pass => {
  * @returns
  */
 export const match = (value, confirm) => {
+  if (value.trim().length === 0 || confirm.trim().length === 0) return false
+
   return value === confirm
 }

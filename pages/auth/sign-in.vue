@@ -1,7 +1,7 @@
 <template>
   <div class="sign-in">
     <toast />
-    <div class="login-form">
+    <b-card class="login-form">
       <b-form @submit="onSubmit">
         <h2 class="text-center mb-4">
           Sing In
@@ -65,7 +65,7 @@
           </NLink>
         </div>
       </b-form>
-    </div>
+    </b-card>
   </div>
 </template>
 

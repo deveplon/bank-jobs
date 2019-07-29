@@ -1,6 +1,6 @@
 <template>
-  <b-card>
-    Welcome
+  <b-card class="complete-container">
+    Welcome to BankJobs dashboard
   </b-card>
 </template>
 

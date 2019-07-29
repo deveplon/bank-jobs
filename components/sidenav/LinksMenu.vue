@@ -1,23 +1,50 @@
 <template>
   <div class="sidenav-menu">
     <div v-for="(link, i) in links" :key="i" class="menu-group-link">
-      <NLink class="menu-link" :to="link.to">
-        <font-awesome-icon :icon="link.icon" />
-        <span class="menu-link-text ml-2">
-          {{ link.text }}
-        </span>
-      </NLink>
+      <component :is="link.component" :params="link.params" />
     </div>
   </div>
 </template>
 
 <script>
+import Link from './Link'
+import Tree from './Tree'
+
 export default {
+  components: {
+    Link,
+    Tree
+  },
   data() {
     return {
       links: [
-        { to: '/', text: 'dashboard', icon: 'tachometer-alt' },
-        { to: '/jobs/create', text: 'create job', icon: 'newspaper' }
+        {
+          component: 'Link',
+          params: {
+            to: '/',
+            text: 'dashboard',
+            icon: 'tachometer-alt'
+          }
+        },
+        {
+          component: 'Tree',
+          params: {
+            text: 'jobs',
+            icon: 'list-alt',
+            links: [
+              { to: '/jobs/list', text: 'List' },
+              { to: '/jobs/create', text: 'Create' }
+            ]
+          }
+        },
+        {
+          component: 'Link',
+          params: {
+            to: '/contact/list',
+            text: 'contacts',
+            icon: 'envelope'
+          }
+        }
       ]
     }
   }
@@ -35,16 +62,5 @@ export default {
 }
 .menu-group-link {
   margin: 40px 0;
-}
-.menu-link {
-  display: flex;
-  align-items: center;
-  text-transform: capitalize;
-  font-size: 1.4rem;
-  font-weight: 400;
-  letter-spacing: 0.6px;
-}
-.menu-link .menu-link-text {
-  font-size: 1.05rem;
 }
 </style>

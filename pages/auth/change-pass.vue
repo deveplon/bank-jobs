@@ -4,48 +4,8 @@
     <b-card class="sign-up-content">
       <b-form @submit="onSubmit">
         <h4 class="text-center mb-3">
-          Sing Up New User
+          Change You Password
         </h4>
-        <b-form-group
-          id="email-group"
-          label="Email address:"
-          label-for="email"
-          inline
-        >
-          <b-form-input
-            id="email"
-            v-model="form.email"
-            type="email"
-            required
-            :state="validEmail"
-            placeholder="Enter email"
-            @blur="validEmail = isValidEmail(form.email)"
-          />
-          <b-form-invalid-feedback :state="validEmail">
-            Invalid email please use something like test@test.com
-          </b-form-invalid-feedback>
-          <b-form-valid-feedback :state="validEmail">
-            Looks Good.
-          </b-form-valid-feedback>
-        </b-form-group>
-
-        <b-form-group id="name-group" label="Your Name:" label-for="name">
-          <b-form-input
-            id="name"
-            v-model="form.name"
-            required
-            :state="validName"
-            placeholder="Enter your name here"
-            @blur="validName = isValidText(form.name)"
-          />
-
-          <b-form-invalid-feedback :state="validName">
-            Invalid name, only accept letters
-          </b-form-invalid-feedback>
-          <b-form-valid-feedback :state="validName">
-            Looks Good.
-          </b-form-valid-feedback>
-        </b-form-group>
 
         <b-form-group
           id="password-group"
@@ -63,8 +23,7 @@
           />
 
           <b-form-invalid-feedback :state="validPass">
-            The password must be at least 6 characters long and only accept
-            letter or this special characters _ \ - # $ ^ + = ! * () @ % &
+            The password must be at least 6 characters long
           </b-form-invalid-feedback>
           <b-form-valid-feedback :state="validPass">
             Looks Good.
@@ -113,12 +72,7 @@
 <script>
 import Toast from '~/components/global/Toast.vue'
 
-import {
-  isValidText,
-  isValidEmail,
-  isValidPass,
-  match
-} from '~/utils/form-validator.js'
+import { isValidPass, match } from '~/utils/form-validator.js'
 
 import { onSubmit } from '~/utils/auth.js'
 
@@ -129,14 +83,10 @@ export default {
   data() {
     return {
       form: {
-        email: '',
-        name: '',
         password: '',
         confirm: ''
       },
-      validEmail: null,
       validPass: null,
-      validName: null,
       validConfirm: null,
       loading: false
     }
@@ -147,8 +97,6 @@ export default {
       const submit = onSubmit.bind(this)
       await submit('auth/register', this.form)
     },
-    isValidText,
-    isValidEmail,
     isValidPass,
     match
   }

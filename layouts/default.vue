@@ -81,7 +81,23 @@ a:hover {
 }
 .content {
   width: 100%;
+  display: flex;
+  justify-content: center;
   min-height: calc(100vh - 120px);
-  padding: 40px 50px;
+  padding: 20px 40px;
+}
+.complete-container {
+  width: 100%;
+}
+
+/** Buttons Aux **/
+.tree-button {
+  padding: 0;
+  color: var(--text);
+  font-size: 1.4rem;
+}
+.tree-button:focus {
+  outline: none;
+  box-shadow: none;
 }
 </style>
