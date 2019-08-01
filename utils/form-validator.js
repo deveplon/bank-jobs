@@ -5,9 +5,11 @@
  * @returns
  */
 export const isValidText = text => {
+  // eslint-disable-next-line no-console
+  console.log(text)
   if (text.trim().length === 0) return false
 
-  return /^[a-zA-Z0-9 ]*$/gm.test(text)
+  return /^[a-zA-Z0-9_\-#$^+=!*()@%& ]*$/gm.test(text)
 }
 
 /**
@@ -29,7 +31,7 @@ export const isValidEmail = email => {
  * @returns
  */
 export const isValidPass = pass => {
-  if (pass.trim().length === 0) return false
+  if (pass.trim().length < 6) return false
 
   return /^[a-zA-Z0-9_\-#$^+=!*()@%&]*$/gm.test(pass)
 }

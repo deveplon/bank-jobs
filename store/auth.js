@@ -30,5 +30,14 @@ export const actions = {
   async register({ commit }, data) {
     await this.$axios.$post('/auth/register', data)
     return true
+  },
+  async changePass({ state, commit }, data) {
+    const id = state.user
+    await this.$axios.$post('/auth/change-pass', { ...data, id })
+    return true
+  },
+  logout({ commit }) {
+    setCookie('auth', 'end', -1)
+    commit('setUser', null)
   }
 }

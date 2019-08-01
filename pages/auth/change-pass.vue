@@ -7,11 +7,7 @@
           Change You Password
         </h4>
 
-        <b-form-group
-          id="password-group"
-          label="Your Password:"
-          label-for="pass"
-        >
+        <b-form-group id="password-group" label="Your Password:" label-for="pass">
           <b-form-input
             id="pass"
             v-model="form.password"
@@ -57,7 +53,7 @@
           <b-spinner
             v-if="loading"
             small
-            variant="primary"
+            variant="outline-primary"
             label="Small Spinner"
           />
           <span v-else>
@@ -95,7 +91,7 @@ export default {
     async onSubmit(e) {
       e.preventDefault()
       const submit = onSubmit.bind(this)
-      await submit('auth/register', this.form)
+      await submit('auth/changePass', this.form, 'Password sucessfully changed')
     },
     isValidPass,
     match

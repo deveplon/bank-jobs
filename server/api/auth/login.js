@@ -18,10 +18,7 @@ module.exports = async (req, res) => {
 
   if (!/\S+@\S+\.\S+/.test(email)) return dataError(res, 'email')
 
-  if (
-    password.trim().length <= 6 ||
-    !/^[a-zA-Z0-9_\-#$^+=!*()@%&]*$/gm.test(password)
-  ) {
+  if (password.trim().length < 6 || !/^[a-zA-Z0-9_\-#$^+=!*()@%&]*$/gm.test(password)) {
     return dataError(res, 'password')
   }
 

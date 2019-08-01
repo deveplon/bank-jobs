@@ -11,16 +11,24 @@
         <NLink to="/auth/sign-up" role="menu-item" class="dropdown-item">
           Register New User
         </NLink>
-        <NLink to="/auth/logout" role="menu-item" class="dropdown-item">
+        <a href="#" role="menu-item" class="dropdown-item" @click="logout">
           Log Out
-        </NLink>
+        </a>
       </b-dropdown>
     </div>
   </header>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    logout(e) {
+      e.preventDefault()
+      this.$store.dispatch('auth/logout')
+      window.location = '/auth/sign-in'
+    }
+  }
+}
 </script>
 
 <style scoped>

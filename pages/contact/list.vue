@@ -1,6 +1,6 @@
 <template>
   <b-card class="complete-container">
-    Welcome Job List
+    Welcome to Contact
   </b-card>
 </template>
 

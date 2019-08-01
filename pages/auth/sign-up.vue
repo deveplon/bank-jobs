@@ -98,7 +98,7 @@
           <b-spinner
             v-if="loading"
             small
-            variant="primary"
+            variant="outline-primary"
             label="Small Spinner"
           />
           <span v-else>
@@ -145,7 +145,7 @@ export default {
     async onSubmit(e) {
       e.preventDefault()
       const submit = onSubmit.bind(this)
-      await submit('auth/register', this.form)
+      await submit('auth/register', this.form, 'User succesfully created!')
     },
     isValidText,
     isValidEmail,
