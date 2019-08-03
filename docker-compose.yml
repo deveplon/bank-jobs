@@ -1,12 +1,12 @@
-version: "3"
+version: "3.3"
 
 services:
-  bank-job:
+  bankjobs:
     build:
       context: .
       dockerfile: Dockerfile
     image: nodejs
-    container_name: bank-jobs
+    container_name: bankjobss
     restart: always
     env_file: .env
     environment:
@@ -19,29 +19,34 @@ services:
       - MONGO_RETRIES=${MONGO_RETRIES}
       - SECRET=${SECRET}
     depends_on:
-      - bank-job-db
+      - bankjobs-db
     ports:
       - "3000:3000"
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
     networks:
-      - bank-job-network
-    command: ./db.sh db:27017 -- npm run dev
+      bankjobs-network:
+        aliases: 
+          - bankjobs.localhost
 
-  bank-job-db:
+    command: ./db.sh bankjobs-db:27017 -- npm run dev
+
+  bankjobs-db:
     image: mongo:4.1.8-xenial
-    container_name: db
+    container_name: bankjobs-db
     restart: unless-stopped
     ports:
-      - "27017:27017"
+      - "30001:27017"
     volumes:
-      - dbdata:/data/db
+      - dbdata:/data/bankjobs-db
     networks:
-      - bank-job-network
+      bankjobs-network:
+        aliases:
+          - bankjobs-db.localhost
 
 networks:
-  bank-job-network:
+  bankjobs-network:
     driver: bridge
 
 volumes:
