@@ -6,8 +6,8 @@ const upload = require('../lib/multer')
 const { list, getById, last, send, update, file } = require('../api/contact')
 
 router.get('/', list)
-router.get('/:id', getById)
 router.get('/last', last)
+router.get('/:id', getById)
 
 router.post('/update', update)
 router.post('/send', send)
