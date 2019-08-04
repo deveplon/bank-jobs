@@ -13,8 +13,8 @@ const {
 } = require('../api/job')
 
 router.get('/', list)
-router.get('/:id', getById)
 router.get('/last', lastJob)
+router.get('/:id', getById)
 
 router.post('/create', create)
 router.post('/update', update)
