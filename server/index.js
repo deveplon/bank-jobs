@@ -21,7 +21,18 @@ module.exports = async function start() {
     const builder = new Builder(nuxt)
     await builder.build()
   } else {
-    await nuxt.ready()
+    try {
+      await nuxt.ready()
+      consola.ready({
+        message: 'Nuxt running',
+        badge: true
+      })
+    } catch (err) {
+      consola.error({
+        message: `Error: ${err.message}`,
+        badge: true
+      })
+    }
   }
 
   let mongo

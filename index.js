@@ -1,8 +1,7 @@
 /**
  * Init Nuxt system
-*/
+ */
 
-const start = require('./server');
+const start = require('./server')
 
 start()
-

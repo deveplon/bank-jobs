@@ -38,7 +38,7 @@ services:
         aliases: 
           - bankjobs.localhost
 
-    command: ./db.sh bankjobs-db:27017 -- npm run dev
+    command: ./db.sh bankjobs-db:27017 -- npm start
 
   bankjobs-db:
     image: mongo:4.1.8-xenial
