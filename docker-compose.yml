@@ -18,6 +18,14 @@ services:
       - MONGO_DB=${MONGO_DB}
       - MONGO_RETRIES=${MONGO_RETRIES}
       - SECRET=${SECRET}
+      - MAIL_SERVICE=${MAIL_SERVICE}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_SECURE=${MAIL_SECURE}
+      - MAIL_USER=${MAIL_USER}
+      - MAIL_PASS=${MAIL_PASS}
+      - MAIL_SENDER=${MAIL_SENDER}
+      - MAIL_RECEIVERS=${MAIL_RECEIVERS}
     depends_on:
       - bankjobs-db
     ports:

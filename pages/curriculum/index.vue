@@ -3,7 +3,7 @@
     <toast />
     <b-card class="contact-form">
       <b-form @submit="onSubmit">
-        <h2 class="text-center mb-4">Sing In</h2>
+        <h2 class="text-center mb-4">Send Curriculum</h2>
         <b-form-group id="email-group" label="Email address:" label-for="email">
           <b-form-input
             id="email"
@@ -38,13 +38,14 @@
           <b-form-input
             id="phone"
             v-model="form.phone"
+            type="number"
             required
             :state="validPhone"
             placeholder="Enter your phone here"
             @blur="validPhone = isValidNumber(form.phone)"
           />
 
-          <b-form-invalid-feedback :state="validPhone">Invalid name, only accept numbers</b-form-invalid-feedback>
+          <b-form-invalid-feedback :state="validPhone">Invalid phone, only accept numbers</b-form-invalid-feedback>
           <b-form-valid-feedback :state="validPhone">Looks Good.</b-form-valid-feedback>
         </b-form-group>
 
@@ -76,7 +77,6 @@ import {
   isValidText,
   isValidNumber
 } from '~/utils/form-validator.js'
-import { onSubmit } from '~/utils/auth.js'
 
 export default {
   layout: 'auth',
@@ -102,11 +102,12 @@ export default {
     async onSubmit(e) {
       e.preventDefault()
 
-      if (!curriculum) {
+      if (!this.curriculum) {
         this.$store.dispatch('toast/showToast', {
           message: 'Curriculum file is required',
-          variant: 'info'
+          variant: 'warning'
         })
+        return
       }
 
       this.loading = true
@@ -128,7 +129,10 @@ export default {
           phone: ''
         }
       } catch (err) {
-        this.$store.dispatch('toast/showToast', { message: err.message })
+        this.$store.dispatch('toast/showToast', {
+          message:
+            'We experiment some problems and cannot process your request now'
+        })
         this.loading = false
       }
     },

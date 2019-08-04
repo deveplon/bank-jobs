@@ -5,7 +5,8 @@ export const actions = {
     return this.$axios.$post('/contact/file', formData)
   },
   async send({ dispatch }, { contact, file }) {
-    await dispatch('sendFile', file)
-    await this.$axios.$post('/contact/receive', contact)
+    const { id, path } = await dispatch('sendFile', file)
+    await this.$axios.$post('/contact/send', { ...contact, path })
+    await this.$axios.$post('/contact/update', { contact, id })
   }
 }
