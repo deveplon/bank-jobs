@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: nodejs
-    container_name: bankjobss
+    container_name: bankjobs
     restart: always
     env_file: .env
     environment:

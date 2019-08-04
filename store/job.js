@@ -16,13 +16,13 @@ export const actions = {
   sendFile({ commit }, file) {
     const formData = new FormData()
     formData.append('file', file)
-
-    return this.$axios.$post('/job/save-company-logo', formData)
+    return this.$axios.$post('/job/save-image', formData)
   },
-  async create({ dispatch }, { file, job }) {
+  async createWithFile({ dispatch }, { file, job }) {
     const { id } = await dispatch('sendFile', file)
-    // eslint-disable-next-line no-console
-    console.log(id)
-    // await this.$axios.$post('/job/save', { ...job, id })
+    await this.$axios.$post('/job/update', { job, id })
+  },
+  async create({ commit }, { job }) {
+    await this.$axios.$post('/job/create', job)
   }
 }

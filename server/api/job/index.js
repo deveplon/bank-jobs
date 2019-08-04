@@ -1,5 +1,13 @@
-const saveCompanyLogo = require('./saveCompanyLogo')
+const list = require('./list')
+const lastJob = require('./lastJob')
+const create = require('./create')
+const update = require('./update')
+const saveImage = require('./saveImage')
 
 module.exports = {
-  saveCompanyLogo
+  list,
+  lastJob,
+  create,
+  update,
+  saveImage
 }

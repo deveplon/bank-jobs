@@ -5,11 +5,21 @@
  * @returns
  */
 export const isValidText = text => {
-  // eslint-disable-next-line no-console
-  console.log(text)
   if (text.trim().length === 0) return false
 
   return /^[a-zA-Z0-9_\-#$^+=!*()@%& ]*$/gm.test(text)
+}
+
+/**
+ * Validate string text
+ *
+ * @param {String} text
+ * @returns
+ */
+export const isValidNumber = number => {
+  if (number.trim().length === 0) return false
+
+  return /^[0-9]*$/gm.test(number)
 }
 
 /**

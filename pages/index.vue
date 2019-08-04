@@ -1,11 +1,22 @@
 <template>
-  <b-card class="complete-container">
-    Welcome to BankJobs dashboard
-  </b-card>
+  <div class="home-content">
+    <toast />
+    <b-card class="complete-container">Welcome to BankJobs dashboard</b-card>
+  </div>
 </template>
 
 <script>
-export default {}
+import Toast from '~/components/global/Toast.vue'
+
+export default {
+  components: {
+    Toast
+  }
+}
 </script>
 
-<style></style>
+<style>
+.home-content {
+  width: 95%;
+}
+</style>

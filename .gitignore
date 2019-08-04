@@ -89,3 +89,7 @@ sw.*
 
 # Configuration file
 app.config.js
+
+# Static files
+static/company_logos/
+static/contacts/
