@@ -59,5 +59,6 @@ networks:
 
 volumes:
   dbdata:
+    external: true
   node_modules:
 
