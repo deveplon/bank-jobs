@@ -47,7 +47,7 @@ services:
     ports:
       - "30001:27017"
     volumes:
-      - dbdata:/data/bankjobs-db
+      - dbdata:/data/db
     networks:
       bankjobs-network:
         aliases:
