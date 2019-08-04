@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
 
     if (!lastContact) throw new Error()
 
-    return res.json({ code: 'OK', job: lastContact[0] })
+    return res.json({ code: 'OK', contact: lastContact[0] })
   } catch (err) {
     return res.status(404).json({ code: 'Not Found' })
   }
