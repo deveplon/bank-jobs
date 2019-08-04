@@ -11,7 +11,7 @@
     "dev": "cross-env NODE_ENV=development ./node_modules/.bin/nodemon --legacy-watch . -p 3000",
     "dev-debug": "node --inspect node_modules/.bin/nuxt",
     "build": "nuxt build --universal",
-    "start": "NODE_ENV=production node .",
+    "start": "npm run build && NODE_ENV=production node .",
     "generate": "nuxt generate"
   },
   "dependencies": {
