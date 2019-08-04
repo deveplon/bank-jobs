@@ -3,9 +3,7 @@
     <toast />
     <b-card class="sign-up-content">
       <b-form @submit="onSubmit">
-        <h4 class="text-center mb-3">
-          Change You Password
-        </h4>
+        <h4 class="text-center mb-3">Change You Password</h4>
 
         <b-form-group id="password-group" label="Your Password:" label-for="pass">
           <b-form-input
@@ -18,12 +16,10 @@
             @blur="validPass = isValidPass(form.password)"
           />
 
-          <b-form-invalid-feedback :state="validPass">
-            The password must be at least 6 characters long
-          </b-form-invalid-feedback>
-          <b-form-valid-feedback :state="validPass">
-            Looks Good.
-          </b-form-valid-feedback>
+          <b-form-invalid-feedback
+            :state="validPass"
+          >The password must be at least 6 characters long</b-form-invalid-feedback>
+          <b-form-valid-feedback :state="validPass">Looks Good.</b-form-valid-feedback>
         </b-form-group>
 
         <b-form-group
@@ -41,24 +37,15 @@
             @blur="validConfirm = match(form.password, form.confirm)"
           />
 
-          <b-form-invalid-feedback :state="validConfirm">
-            The password and password confirmation does not match
-          </b-form-invalid-feedback>
-          <b-form-valid-feedback :state="validConfirm">
-            Looks Good.
-          </b-form-valid-feedback>
+          <b-form-invalid-feedback
+            :state="validConfirm"
+          >The password and password confirmation does not match</b-form-invalid-feedback>
+          <b-form-valid-feedback :state="validConfirm">Looks Good.</b-form-valid-feedback>
         </b-form-group>
 
         <b-button class="mt-5" type="submit" block variant="primary">
-          <b-spinner
-            v-if="loading"
-            small
-            variant="outline-primary"
-            label="Small Spinner"
-          />
-          <span v-else>
-            Submit
-          </span>
+          <b-spinner v-if="loading" small variant="outline-primary" label="Small Spinner" />
+          <span v-else>Submit</span>
         </b-button>
       </b-form>
     </b-card>
@@ -101,6 +88,6 @@ export default {
 
 <style scoped>
 .sign-up-content {
-  width: 90%;
+  width: 100%;
 }
 </style>

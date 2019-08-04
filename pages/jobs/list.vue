@@ -28,12 +28,17 @@ export default {
   },
   async asyncData({ $axios, query }) {
     try {
-      const { jobs, totalJobs } = await $axios.$get('job/list', {
+      const { jobs, totalJobs } = await $axios.$get('job', {
         params: query
       })
       return { jobs, totalJobs }
     } catch (err) {
       return { jobs: [], totalJobs: 0 }
+    }
+  },
+  beforeMount() {
+    if (window.innerWidth <= 500) {
+      this.fields = ['jobTitle']
     }
   },
   methods: {

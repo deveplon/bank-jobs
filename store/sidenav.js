@@ -1,5 +1,5 @@
 export const state = () => ({
-  toggle: true
+  toggle: false
 })
 
 export const getters = {

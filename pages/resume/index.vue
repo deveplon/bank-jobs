@@ -1,9 +1,12 @@
 <template>
   <div class="contact">
     <toast />
+    <div class="bank-logo">
+      <img src="/company-logo.png" alt="Start UI Logo" />
+    </div>
     <b-card class="contact-form">
       <b-form @submit="onSubmit">
-        <h2 class="text-center mb-4">Send Curriculum</h2>
+        <h2 class="text-center mb-4">Send Resume</h2>
         <b-form-group id="email-group" label="Email address:" label-for="email">
           <b-form-input
             id="email"
@@ -49,7 +52,7 @@
           <b-form-valid-feedback :state="validPhone">Looks Good.</b-form-valid-feedback>
         </b-form-group>
 
-        <b-form-group id="file-group" label="Your Curriculum:" label-for="curriculum">
+        <b-form-group id="file-group" label="Your Resume:" label-for="curriculum">
           <b-form-file
             id="curriculum"
             v-model="curriculum"
@@ -80,7 +83,6 @@ import {
 
 export default {
   layout: 'auth',
-  middleware: 'auth/authenticated',
   components: {
     Toast
   },
@@ -104,7 +106,7 @@ export default {
 
       if (!this.curriculum) {
         this.$store.dispatch('toast/showToast', {
-          message: 'Curriculum file is required',
+          message: 'Resume file is required',
           variant: 'warning'
         })
         return
@@ -120,7 +122,7 @@ export default {
 
         this.loading = false
         this.$store.dispatch('toast/showToast', {
-          message: 'New job created',
+          message: 'Your resume was sent correctly',
           variant: 'success'
         })
         this.form = {
@@ -152,16 +154,30 @@ export default {
 <style scoped>
 .contact {
   display: flex;
-  justify-content: center;
+  flex-flow: column;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: 100vh;
 }
+.bank-logo {
+  width: 200px;
+  margin: 20px 0;
+}
+.bank-logo img {
+  display: block;
+  width: 100%;
+}
 .contact-form {
-  flex-basis: 50%;
-  padding: 20px 25px 30px 25px;
+  width: 50%;
+  padding: 10px 25px 0 25px;
   border: 1px solid var(--border-and-shadow);
   border-radius: 5px;
   box-shadow: 1px 2px 5px var(--border-and-shadow);
+}
+@media screen and (max-width: 700px) {
+  .contact-form {
+    width: 90%;
+  }
 }
 </style>

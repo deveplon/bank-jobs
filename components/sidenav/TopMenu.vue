@@ -1,12 +1,8 @@
 <template>
   <div class="sidenav-header">
     <NLink class="sidenav-logo" to="/">
-      <span class="company">
-        bankjobs
-      </span>
-      <span class="admin">
-        admin
-      </span>
+      <span class="company">bankjobs</span>
+      <span class="admin">admin</span>
     </NLink>
   </div>
 </template>
@@ -25,6 +21,10 @@
   border-right: 1px solid var(--border-and-shadow);
   border-bottom: 1px solid var(--border-and-shadow);
   box-shadow: 0 2px 4px var(--border-and-shadow);
+}
+.sidenav-logo {
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 .sidenav-logo:hover {
   text-decoration: none;

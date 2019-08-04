@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
     const { messageId } = await mailer.sendMail({
       from: MAIL_SENDER,
       to: MAIL_RECEIVERS,
-      subject: `New Curriculum of ${name}`,
+      subject: `New resume from bank jobs of ${name}`,
       text: `
 				New Contact\n
 				Name: ${name}\n

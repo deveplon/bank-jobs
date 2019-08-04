@@ -1,6 +1,6 @@
 <template>
-  <transition name="slide-side">
-    <div v-if="toggle" class="sidenav">
+  <transition name="slide">
+    <div v-show="toggle" class="sidenav">
       <top-menu />
       <links-menu />
     </div>
@@ -20,6 +20,11 @@ export default {
     toggle() {
       return this.$store.getters['sidenav/toggle']
     }
+  },
+  mounted() {
+    if (window.innerWidth > 700 && !this.$store.getters['sidenav/toggle']) {
+      this.$store.dispatch('sidenav/toggle')
+    }
   }
 }
 </script>
@@ -32,5 +37,26 @@ export default {
   width: 300px;
   height: 100vh;
   background-color: var(--bg-light);
+  overflow: hidden;
+}
+.slide-leave-active,
+.slide-enter-active {
+  transition: 0.6s;
+}
+.slide-enter,
+.slide-leave-to {
+  width: 0;
+}
+@media screen and (max-width: 700px) {
+  .sidenav {
+    position: fixed;
+    top: 80px;
+    width: 100%;
+    z-index: 999;
+  }
+  .slide-enter,
+  .slide-leave-to {
+    transform: translate(-100%, 0);
+  }
 }
 </style>

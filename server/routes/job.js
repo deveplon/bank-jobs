@@ -3,9 +3,17 @@ const router = express.Router()
 
 const upload = require('../lib/multer')
 
-const { list, lastJob, create, update, saveImage } = require('../api/job')
+const {
+  list,
+  getById,
+  lastJob,
+  create,
+  update,
+  saveImage
+} = require('../api/job')
 
-router.get('/list', list)
+router.get('/', list)
+router.get('/:id', getById)
 router.get('/last', lastJob)
 
 router.post('/create', create)

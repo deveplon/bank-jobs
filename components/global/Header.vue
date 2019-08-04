@@ -1,19 +1,18 @@
 <template>
   <header>
     <div>
+      <a href="#" @click.prevent="toogleSideNav">
+        <font-awesome-icon icon="bars" />
+      </a>
+    </div>
+    <div>
       <b-dropdown right variant="outline-secondary">
         <template slot="button-content">
           <font-awesome-icon icon="user" />
         </template>
-        <NLink to="/auth/change-pass" role="menu-item" class="dropdown-item">
-          Change Password
-        </NLink>
-        <NLink to="/auth/sign-up" role="menu-item" class="dropdown-item">
-          Register New User
-        </NLink>
-        <a href="#" role="menu-item" class="dropdown-item" @click="logout">
-          Log Out
-        </a>
+        <NLink to="/auth/change-pass" role="menu-item" class="dropdown-item">Change Password</NLink>
+        <NLink to="/auth/sign-up" role="menu-item" class="dropdown-item">Register New User</NLink>
+        <a href="#" role="menu-item" class="dropdown-item" @click="logout">Log Out</a>
       </b-dropdown>
     </div>
   </header>
@@ -22,6 +21,9 @@
 <script>
 export default {
   methods: {
+    toogleSideNav() {
+      this.$store.dispatch('sidenav/toggle')
+    },
     logout(e) {
       e.preventDefault()
       this.$store.dispatch('auth/logout')
@@ -35,7 +37,7 @@ export default {
 header {
   position: relative;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 80px;

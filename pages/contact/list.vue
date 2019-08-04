@@ -21,12 +21,17 @@ export default {
   },
   async asyncData({ $axios, query }) {
     try {
-      const { contacts, totalContacts } = await $axios.$get('contact/list', {
+      const { contacts, totalContacts } = await $axios.$get('contact', {
         params: query
       })
       return { contacts, totalContacts }
     } catch (err) {
       return { contacts: [], totalContacts: 0 }
+    }
+  },
+  beforeMount() {
+    if (window.innerWidth <= 500) {
+      this.fields = ['email']
     }
   },
   methods: {
