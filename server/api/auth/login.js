@@ -16,12 +16,6 @@ function dataError(res, type) {
 module.exports = async (req, res) => {
   const { email, password } = req.body
 
-  if (!/\S+@\S+\.\S+/.test(email)) return dataError(res, 'email')
-
-  if (password.trim().length < 6 || !/^[a-zA-Z0-9_\-#$^+=!*()@%&]*$/gm.test(password)) {
-    return dataError(res, 'password')
-  }
-
   try {
     const user = await req.mongo.db.collection('users').findOne({ email })
     if (!user) return dataError(res, 'email')

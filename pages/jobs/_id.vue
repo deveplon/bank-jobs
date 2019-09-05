@@ -52,7 +52,7 @@
 
         <b-button class="mt-5" type="submit" block variant="primary">
           <b-spinner v-if="loading" small variant="outline-primary" label="Small Spinner" />
-          <span v-else>Create</span>
+          <span v-else>Update</span>
         </b-button>
       </b-form>
     </b-card>
@@ -72,24 +72,6 @@ export default {
       companyLogoImg: '',
       images: {
         companyLogo: null
-      },
-      form: {
-        uiJobId: '',
-        jobTitle: '',
-        logoUrl: '',
-        companyAddress: '',
-        jobTasks: '',
-        driverLicense: '',
-        languageDemand: '',
-        personalProfile: '',
-        workingHours: '',
-        salary: '',
-        workBody: '',
-        internship: '',
-        contractStart: '',
-        contractEnd: '',
-        cvDeadline: '',
-        contact: ''
       },
       textInputs: [
         { id: 'ui-job-id', label: 'UI Job Id', key: 'uiJobId' },
@@ -149,18 +131,20 @@ export default {
   },
   computed: {
     fileImage() {
-      return this.companyLogoImg ? this.companyLogoImg : '/no-image.png'
+      if (this.companyLogoImg) return this.companyLogoImg
+
+      return this.form.companyLogo ? this.form.companyLogo : '/no-image.png'
     }
   },
-  async asyncData({ $axios, params }) {
+  async asyncData({ redirect, $axios, params: { id } }) {
     try {
       const {
-        job: { companyLogo }
-      } = await $axios.$get('job/last')
+        job: { _id, ...form }
+      } = await $axios.$get(`job/${id}`)
 
-      return { companyLogoImg: companyLogo }
+      return { jobId: id, form }
     } catch (err) {
-      return { companyLogoImg: '' }
+      redirect('/')
     }
   },
   methods: {
@@ -181,39 +165,23 @@ export default {
 
       this.loading = true
 
-      const form = !this.images.companyLogo
-        ? { job: { ...this.form, companyLogo: this.companyLogoImg } }
-        : { file: this.images.companyLogo, job: this.form }
+      const { companyLogo, ...job } = this.form
 
-      const url = !this.images.companyLogo ? 'job/create' : 'job/createWithFile'
+      const formData = !this.images.companyLogo
+        ? { id: this.jobId, job: this.form }
+        : { id: this.jobId, file: this.images.companyLogo, job }
+
+      const url = !this.images.companyLogo ? 'job/update' : 'job/updateWithFile'
       try {
-        await this.$store.dispatch(url, form)
+        const newId = await this.$store.dispatch(url, formData)
         this.loading = false
         this.$store.dispatch('toast/showToast', {
-          message: 'New job created',
+          message: 'Job successfully updated',
           variant: 'success'
         })
-        this.form = {
-          uiJobId: '',
-          jobTitle: '',
-          logoUrl: '',
-          companyAddress: '',
-          jobTasks: '',
-          driverLicense: '',
-          languageDemand: '',
-          personalProfile: '',
-          workingHours: '',
-          salary: '',
-          workBody: '',
-          internship: '',
-          contractStart: '',
-          contractEnd: '',
-          cvDeadline: '',
-          contact: ''
-        }
         setTimeout(() => {
-          window.location = '/'
-        }, 3500)
+          window.location = `/jobs/${newId}`
+        }, 2500)
       } catch (err) {
         this.$store.dispatch('toast/showToast', { message: err.message })
         this.loading = false
