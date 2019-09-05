@@ -21,8 +21,6 @@ module.exports = async (req, res) => {
 
     return res.json({ code: 'OK' })
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err)
     if (err.message.indexOf('E11000') !== -1) {
       return res
         .status(400)

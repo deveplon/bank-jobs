@@ -3,7 +3,7 @@
     <toast />
     <b-card class="create-job-content">
       <b-form @submit="onSubmit">
-        <h4 class="text-center mb-3">Create new job</h4>
+        <h4 class="text-center mb-3">Update Job</h4>
 
         <b-form-row class="mb-3">
           <b-col class="d-flex justify-content-center">
