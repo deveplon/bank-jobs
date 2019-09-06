@@ -7,6 +7,10 @@
           <a :href="`/jobs/${data.item._id}`">{{ data.value }}</a>
         </template>
 
+        <template slot="jobTitle" slot-scope="data">
+          <a :href="`/jobs/${data.item._id}`">{{ data.value }}</a>
+        </template>
+
         <template slot="_id" slot-scope="data">
           <b-button variant="danger" @click.prevent="deleteJob(data.value)">delete</b-button>
         </template>
