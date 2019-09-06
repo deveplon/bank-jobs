@@ -152,17 +152,6 @@ export default {
       return this.companyLogoImg ? this.companyLogoImg : '/no-image.png'
     }
   },
-  async asyncData({ $axios, params }) {
-    try {
-      const {
-        job: { companyLogo }
-      } = await $axios.$get('job/last')
-
-      return { companyLogoImg: companyLogo }
-    } catch (err) {
-      return { companyLogoImg: '' }
-    }
-  },
   methods: {
     formatNames(files) {
       return files.length === 1 ? files[0].name : 'Select file'
