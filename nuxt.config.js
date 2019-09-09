@@ -58,7 +58,7 @@ module.exports = {
   axios: {
     baseURL:
       process.env.NODE_ENV === 'production'
-        ? `http://bankjobs.publicidadloca.com/api`
+        ? `https://bankjobs.publicidadloca.com/api`
         : `http://${NUXT_HOST}:${NUXT_PORT}/api`
   },
   /*
